@@ -46,4 +46,18 @@ describe("mock api-call", () => {
 
     cy.get("h3").should("contain", "Interstellar");
   });
+
+  it("should call mocked api", () => {
+    cy.intercept("GET", "http://omdbapi.com/*", {
+      fixture: "emptyMoviesList",
+    }).as("moviecall");
+
+    cy.visit("http://localhost:1234/");
+
+    cy.get("input").type("In").should("have.value", "In");
+    cy.get("button").click();
+    cy.wait("@moviecall").its("request.url").should("contain", "In");
+
+    cy.get("div").should("contain", "Inga sökresultat att visa");
+  });
 });
