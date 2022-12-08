@@ -3,6 +3,7 @@ beforeEach(() => {
 });
 
 describe("testing movieApp", () => {
+  it("should visit", () => {});
   it("should find input and type", () => {
     cy.get("input").type("Interstellar").should("have.value", "Interstellar");
   });
@@ -19,7 +20,7 @@ describe("testing movieApp", () => {
     cy.get("div").should("have.id", "movie-container");
   });
 
-  it("should be able to click", () => {
+  it("should show movies when clicking", () => {
     cy.get("input").type("Interstellar").should("have.value", "Interstellar");
     cy.get("button").click();
     cy.get("div").contains("Interstellar");
